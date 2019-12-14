@@ -1,8 +1,21 @@
+buildscript {    // Configuration for building
+	repositories {
+		jcenter()    // Bintray's repository - a fast Maven Central mirror & more
+		mavenCentral()
+	}
+	dependencies {
+		classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.2.0'
+		//classpath 'com.google.cloud.tools:appengine-gradle-plugin:1.+'    // Latest 1.x.x release
+
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.2.2.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
 }
+apply plugin: 'com.google.cloud.tools.appengine'
 
 group = 'com.ttsukiji'
 version = '0.0.1-SNAPSHOT'
@@ -20,6 +33,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
 	implementation 'mysql:mysql-connector-java:8.0.17'
+	// gcp
+	//providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation 'com.google.appengine:appengine-api-1.0-sdk:+'  // Latest App Engine Api's
+	implementation 'com.google.cloud.sql:mysql-socket-factory-connector-j-8:1.0.15'
+
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
@@ -27,4 +46,11 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+appengine {  // App Engine tasks configuration
+	deploy {   // deploy configuration
+		projectId = "GCLOUD_CONFIG"
+		version = "GCLOUD_CONFIG"
+	}
 }

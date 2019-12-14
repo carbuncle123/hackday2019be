@@ -21,6 +21,13 @@ public class KotonohaController {
 
     @CrossOrigin
     @GetMapping
+    @RequestMapping("/")
+    public String hello() {
+        return "Hello World!";
+    }
+
+    @CrossOrigin
+    @GetMapping
     @RequestMapping("/categorize")
     public CategorizeResult categorize(@RequestParam(name = "query") final String query) {
         return dictionaryCategorizer.categorize(query);
