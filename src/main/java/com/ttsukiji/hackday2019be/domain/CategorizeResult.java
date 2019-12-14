@@ -7,7 +7,7 @@ import java.util.Map;
 
 @Data
 @AllArgsConstructor
-public class KotonohaResponse {
+public class CategorizeResult {
     private int result;
     private Map<String, Integer> detail;
 }
