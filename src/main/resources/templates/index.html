@@ -5,6 +5,16 @@
     <title>辞書</title>
 </head>
 <body>
+<h2>検索</h2>
+<form th:action="@{/dict/search}" method="post">
+    <label for="search_word">単語</label>
+    <input type="text" id="search_word" name="search_word">
+    <input type="submit" value="検索">
+</form>
+<p th:text="${categoryId}"></p>
+<h2>
+    追加
+</h2>
 <form th:action="@{/dict/update}" method="post">
     <label for="word">単語</label>
     <input type="text" id="word" name="word">
@@ -14,6 +24,7 @@
     </select>
     <input type="submit" value="追加">
 </form>
+<h2>DBの中身(それぞれ100単語まで)</h2>
 <table>
     <tr th:each="i : ${#numbers.sequence(1, 10)}">
         <td ><img th:src="@{'images/leaf_' + ${i} + '.svg'}" width="20%" th:text="${i}"></td>
