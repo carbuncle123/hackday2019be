@@ -4,12 +4,9 @@ import com.atilika.kuromoji.ipadic.Token;
 import com.atilika.kuromoji.ipadic.Tokenizer;
 import com.ttsukiji.hackday2019be.domain.CategorizeResult;
 import com.ttsukiji.hackday2019be.repository.WordCategorizeRepository;
-import org.jooq.lambda.Seq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.relational.core.sql.In;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
