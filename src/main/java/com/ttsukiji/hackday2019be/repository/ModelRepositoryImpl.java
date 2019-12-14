@@ -9,12 +9,12 @@ import org.springframework.web.client.RestTemplate;
 
 
 @Repository
-public class QueryInferModelRepositoryImpl implements QueryInferModelRepository {
+public class ModelRepositoryImpl implements ModelRepository {
 
     private RestTemplate template;
     private String url;
 
-    public QueryInferModelRepositoryImpl(@Value("${model.url}") final String url) {
+    public ModelRepositoryImpl(@Value("${model.url}") final String url) {
         this.template = new RestTemplate();
         this.url = url;
     }

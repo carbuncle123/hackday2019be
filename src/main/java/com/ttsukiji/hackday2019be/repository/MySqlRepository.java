@@ -7,9 +7,10 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public class MySqlEditRepository implements DictionaryEditRepository {
+public class MySqlRepository implements DictionaryRepository {
     @Autowired
     private NamedParameterJdbcTemplate template;
 
@@ -17,6 +18,13 @@ public class MySqlEditRepository implements DictionaryEditRepository {
     private static final String INSERT_QUERY = "INSERT INTO category(word, category_id) VALUES(:word, :category_id)";
     private static final String SELECT_CATEGORY_QUERY = "SELECT category_id FROM category WHERE word = :word";
     private static final String SELECT_WORDS_QUERY = "SELECT word FROM category WHERE category_id = :category_id LIMIT 100";
+
+    @Override
+    public Optional<Integer> categorize(final String word) {
+        final SqlParameterSource param = new MapSqlParameterSource().addValue("word", word);
+        final List<Integer> result = template.queryForList(SELECT_CATEGORY_QUERY, param, Integer.class);
+        return result.isEmpty() ? Optional.empty() : Optional.of(result.get(0));
+    }
 
     @Override
     public List<String> getWords(final int categoryId) {

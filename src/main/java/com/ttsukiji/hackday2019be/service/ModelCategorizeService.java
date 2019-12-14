@@ -1,7 +1,7 @@
 package com.ttsukiji.hackday2019be.service;
 
 import com.ttsukiji.hackday2019be.domain.CategorizeResult;
-import com.ttsukiji.hackday2019be.repository.QueryInferModelRepository;
+import com.ttsukiji.hackday2019be.repository.ModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -10,15 +10,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class CategorizeWithModelService implements QueryCategorizeService {
-    private QueryInferModelRepository repository;
+public class ModelCategorizeService implements CategorizeService {
+    private ModelRepository repository;
 
     private static final int NEUTRAL_ID = 0;
     private static final int POSITIVE_ID = 1;
     private static final int NEGATIVE_ID = 2;
 
     @Autowired
-    public CategorizeWithModelService(@Qualifier("queryInferModelRepositoryImpl") final QueryInferModelRepository repository) {
+    public ModelCategorizeService(@Qualifier("modelRepositoryImpl") final ModelRepository repository) {
         this.repository = repository;
     }
 

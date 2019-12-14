@@ -1,7 +1,6 @@
 package com.ttsukiji.hackday2019be.controller;
 
-import com.ttsukiji.hackday2019be.repository.DictionaryEditRepository;
-import com.ttsukiji.hackday2019be.repository.MySqlCategorizeRepository;
+import com.ttsukiji.hackday2019be.repository.DictionaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -21,12 +20,8 @@ import java.util.Map;
 public class DictionaryEditController {
 
     @Autowired
-    @Qualifier("mySqlEditRepository")
-    private DictionaryEditRepository mysqlRepository;
-
-    @Autowired
-    @Qualifier("mySqlCategorizeRepository")
-    private MySqlCategorizeRepository categorizeRepository;
+    @Qualifier("mySqlRepository")
+    private DictionaryRepository mysqlRepository;
 
     @GetMapping
     public String get(final Model model) {
@@ -38,7 +33,7 @@ public class DictionaryEditController {
     @PostMapping(path = "search")
     public String search(@RequestParam(name = "search_word") final String word,
                              final RedirectAttributes redirectAttributes){
-        final int categoryId = categorizeRepository.categorize(word).orElse(-1);
+        final int categoryId = mysqlRepository.categorize(word).orElse(-1);
         redirectAttributes.addFlashAttribute("categoryId", categoryId);
         return "redirect:/dict";
     }

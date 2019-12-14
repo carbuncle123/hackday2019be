@@ -3,7 +3,7 @@ package com.ttsukiji.hackday2019be.service;
 import com.atilika.kuromoji.ipadic.Token;
 import com.atilika.kuromoji.ipadic.Tokenizer;
 import com.ttsukiji.hackday2019be.domain.CategorizeResult;
-import com.ttsukiji.hackday2019be.repository.WordCategorizeRepository;
+import com.ttsukiji.hackday2019be.repository.DictionaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,18 +14,18 @@ import java.util.*;
 import static java.util.stream.Collectors.toList;
 
 @Service
-public class CategorizeWithWordService implements QueryCategorizeService {
+public class DictionaryCategorizeService implements CategorizeService {
     private Tokenizer tokenizer;
     private int limit;
     private List<String> targets = Arrays.asList("形容詞", "形容動詞", "名詞");
 
-    private WordCategorizeRepository repository;
+    private DictionaryRepository repository;
 
     public static final int NOT_FOUND_ID = -1;
 
     @Autowired
-    public CategorizeWithWordService(@Qualifier("mySqlCategorizeRepository") final WordCategorizeRepository repository,
-                                     @Value("${tokenize.limit}") final int limit
+    public DictionaryCategorizeService(@Qualifier("mySqlRepository") final DictionaryRepository repository,
+                                       @Value("${tokenize.limit}") final int limit
                                      /*@Value("${tokenize.targetPartOfSpeech}") final List<String> targets*/) {
         this.repository = repository;
         this.tokenizer = new Tokenizer();
