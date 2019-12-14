@@ -12,6 +12,9 @@
     <input type="submit" value="検索">
 </form>
 <p th:text="${categoryId}"></p>
+<div th:if="${categoryId != null && categoryId != -1}">
+    <img th:src="@{'images/leaf_' + ${categoryId} + '.svg'}" width="50px" th:text="${i}">
+</div>
 <h2>
     追加
 </h2>
@@ -27,7 +30,7 @@
 <h2>DBの中身(それぞれ100単語まで)</h2>
 <table>
     <tr th:each="i : ${#numbers.sequence(1, 10)}">
-        <td ><img th:src="@{'images/leaf_' + ${i} + '.svg'}" width="20%" th:text="${i}"></td>
+        <td ><img th:src="@{'images/leaf_' + ${i} + '.svg'}" width="50px" th:text="${i}"></td>
         <td th:text="${catWordMap.get(i)}"></td>
     </tr>
 </table>
