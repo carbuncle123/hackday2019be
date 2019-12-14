@@ -3,8 +3,7 @@ tokenize:
 
 spring:
   datasource:
-    url: ${DATABASE_URL}
-    #url: jdbc:mysql://localhost:3306/hackday2019
-    #username: root
-    #password: ""
+    url: jdbc:mysql://${DB_HOST}:3306/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     driver-class-name: "com.mysql.cj.jdbc.Driver"
